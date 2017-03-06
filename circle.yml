@@ -1,0 +1,18 @@
+## Customize the test machine
+machine:
+
+  # Version of Java to use
+  java:
+    version:
+      oraclejdk8
+
+general:
+  branches:
+    only:
+      - master # list of branches to build
+
+
+## Customize test commands
+test:
+  override:
+    - mvn test # use Maven for testing
