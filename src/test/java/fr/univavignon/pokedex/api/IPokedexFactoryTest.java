@@ -107,12 +107,12 @@ public class IPokedexFactoryTest  {
 			IPokedex localPokedex = pokedexFactory.createPokedex(metadataProvider, pokemonFactory);
 			Assert.assertEquals(1, localPokedex.size());
 			Assert.assertEquals(0, localPokedex.addPokemon(pokemon));
-			Assert.assertEquals("Bullbizar", localPokedex.getPokemon(0).getName());
+			Assert.assertEquals("Bulbizarre", localPokedex.getPokemon(0).getName());
 			
-			Assert.assertEquals("Bullbizar", localPokedex.getPokemons().get(0).getName());
-			Assert.assertEquals("Bullbizar", localPokedex.getPokemons(null).get(0).getName());
+			Assert.assertEquals("Bulbizarre", localPokedex.getPokemons().get(0).getName());
+			Assert.assertEquals("Bulbizarre", localPokedex.getPokemons(null).get(0).getName());
 			
-			Assert.assertEquals("Bullbizar", localPokedex.getPokemons(order).get(0).getName());
+			Assert.assertEquals("Bulbizarre", localPokedex.getPokemons(order).get(0).getName());
 		}
 		catch (Exception ex) {
 			ex.printStackTrace();
