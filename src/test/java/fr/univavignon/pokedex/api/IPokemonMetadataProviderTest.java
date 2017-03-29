@@ -37,7 +37,7 @@ public class IPokemonMetadataProviderTest {
 	
 	
 	@Before
-	private void setUp() throws Exception {
+	public void setUp() throws Exception {
 		configureIPokemonMetadataProvider(metadataProvider);
 	}
 	

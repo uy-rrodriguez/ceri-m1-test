@@ -79,7 +79,7 @@ public class IPokemonTrainerFactoryTest {
 	
 	
 	@Before
-	private void setUp() throws Exception {
+	public void setUp() throws Exception {
 		configureIPokemonTrainerFactory(trainerFactory, pokedexFactory, pokedex, pokemon,
 				order, metadataProvider, pokemonFactory);
 	}

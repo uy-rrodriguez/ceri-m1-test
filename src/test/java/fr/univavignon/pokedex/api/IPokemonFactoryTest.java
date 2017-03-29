@@ -36,7 +36,7 @@ public class IPokemonFactoryTest {
 	}
 	
 	@Before
-	private void setUp() {
+	public void setUp() {
 		configureIPokemonFactory(pokemonFactory);
 	}
 	

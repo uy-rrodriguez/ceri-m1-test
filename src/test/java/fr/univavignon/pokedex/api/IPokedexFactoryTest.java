@@ -88,7 +88,7 @@ public class IPokedexFactoryTest  {
 	
 	
 	@Before
-	private void setUp() throws Exception {
+	public void setUp() throws Exception {
 		configureIPokedexFactory(pokedexFactory, pokedex, pokemon, order, metadataProvider, pokemonFactory);
 	}
 	
