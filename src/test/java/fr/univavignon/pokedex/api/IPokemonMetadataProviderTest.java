@@ -20,7 +20,7 @@ public class IPokemonMetadataProviderTest {
 	private static IPokemonMetadataProvider metadataProvider;
 	
 	@Rule
-	private MockitoRule mockitoRule = MockitoJUnit.rule();
+	public MockitoRule mockitoRule = MockitoJUnit.rule();
 	
 	/**
 	 * Configuration du mock pour IPokemonMetadataProvider.

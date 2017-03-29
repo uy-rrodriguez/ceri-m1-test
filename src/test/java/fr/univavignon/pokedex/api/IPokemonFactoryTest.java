@@ -21,7 +21,7 @@ public class IPokemonFactoryTest {
 	private IPokemonFactory pokemonFactory;
 	
 	@Rule
-	private MockitoRule mockitoRule = MockitoJUnit.rule();
+	public MockitoRule mockitoRule = MockitoJUnit.rule();
 	
 	/**
 	 * Configuration du mock pour IPokemonFactory.

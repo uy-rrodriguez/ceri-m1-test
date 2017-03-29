@@ -38,7 +38,7 @@ public class IPokedexFactoryTest  {
 	private IPokedex pokedex;
 	
 	@Rule
-	private MockitoRule mockitoRule = MockitoJUnit.rule();
+	public MockitoRule mockitoRule = MockitoJUnit.rule();
 
 	/**
 	 * Configuration du mock pour IPokedex.
