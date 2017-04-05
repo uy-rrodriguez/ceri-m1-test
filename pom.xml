@@ -52,6 +52,7 @@
 							<goal>prepare-agent</goal>
 						</goals>
 					</execution>
+					
                     <execution>
 						<id>jacoco-site</id>
 						<phase>site</phase>
