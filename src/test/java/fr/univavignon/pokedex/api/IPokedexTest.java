@@ -3,7 +3,6 @@ package fr.univavignon.pokedex.api;
 import static org.mockito.Mockito.*;
 
 import java.util.Arrays;
-import java.util.Comparator;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -14,13 +13,6 @@ import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 
 public class IPokedexTest  {
-	
-	private Comparator<Pokemon> order = new Comparator<Pokemon>() {
-		@Override
-		public int compare(Pokemon o1, Pokemon o2) {
-			return o1.getIndex() - o2.getIndex();
-		}
-	};
 	
 	private Pokemon pokemon = new Pokemon(0, "Bulbizarre", 126, 126, 90, 613, 64, 4000, 4, 56);
 	
@@ -48,13 +40,13 @@ public class IPokedexTest  {
 	 * @param order
 	 * @throws PokedexException
 	 */
-	protected static void configureIPokedex(IPokedex mock, Pokemon pokemon, Comparator<Pokemon> order) throws PokedexException {
+	protected static void configureIPokedex(IPokedex mock, Pokemon pokemon) throws PokedexException {
 		when(mock.size()).thenAnswer(a -> 1);
 		when(mock.addPokemon(null)).thenAnswer(a -> 0);
 		when(mock.getPokemon(0)).thenAnswer(a -> pokemon);
 		when(mock.getPokemons()).thenAnswer(a -> Arrays.asList(new Pokemon[] {pokemon} ));
 		when(mock.getPokemons(null)).thenAnswer(a -> Arrays.asList(new Pokemon[] {pokemon}  ));
-		when(mock.getPokemons(order)).thenAnswer(a -> Arrays.asList(new Pokemon[] {pokemon}));
+		when(mock.getPokemons(PokemonComparators.INDEX)).thenAnswer(a -> Arrays.asList(new Pokemon[] {pokemon}));
 	}
 	
 	/**
@@ -69,7 +61,6 @@ public class IPokedexTest  {
 	protected static void configureIPokedexFactory(IPokedexFactory mock,
 													IPokedex pokedex,
 													Pokemon pokemon,
-													Comparator<Pokemon> order,
 													IPokemonMetadataProvider metadataProvider,
 													IPokemonFactory pokemonFactory) throws PokedexException {
 		
@@ -80,7 +71,7 @@ public class IPokedexTest  {
 		IPokemonFactoryTest.configureIPokemonFactory(pokemonFactory);
 
 		// Mock IPokedex
-		configureIPokedex(pokedex, pokemon, order);
+		configureIPokedex(pokedex, pokemon);
 
 		// Mock IPokedexFactory
 		when(mock.createPokedex(metadataProvider, pokemonFactory)).thenAnswer(a -> pokedex);
@@ -89,7 +80,7 @@ public class IPokedexTest  {
 	
 	@Before
 	public void setUp() throws Exception {
-		configureIPokedexFactory(pokedexFactory, pokedex, pokemon, order, metadataProvider, pokemonFactory);
+		configureIPokedexFactory(pokedexFactory, pokedex, pokemon, metadataProvider, pokemonFactory);
 	}
 	
 	/**
@@ -112,7 +103,7 @@ public class IPokedexTest  {
 			Assert.assertEquals("Bulbizarre", localPokedex.getPokemons().get(0).getName());
 			Assert.assertEquals("Bulbizarre", localPokedex.getPokemons(null).get(0).getName());
 			
-			Assert.assertEquals("Bulbizarre", localPokedex.getPokemons(order).get(0).getName());
+			Assert.assertEquals("Bulbizarre", localPokedex.getPokemons(PokemonComparators.INDEX).get(0).getName());
 		}
 		catch (Exception ex) {
 			ex.printStackTrace();
