@@ -39,6 +39,21 @@
 				<artifactId>jacoco-maven-plugin</artifactId>
 				<version>0.7.9</version>
 				
+				<configuration>
+					<!-- Name it to make the dependency clearer; default: argLine -->
+                	<propertyName>jacoco.agent.argLine</propertyName>
+                </configuration>
+                
+				<executions>
+					<execution>
+						<id>jacoco-initialize</id>
+						<phase>pre-test</phase>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+				</executions>
+				
 				<!--
 				<executions>
 		          <execution>
