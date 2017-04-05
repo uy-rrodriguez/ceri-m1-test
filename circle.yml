@@ -15,6 +15,7 @@ general:
 ## Customize test commands
 test:
   override:
+    - mvn org.jacoco:jacoco-maven-plugin:prepare-agent # Generer report Jacoco
     - mvn clean test # Test unitaires
-    - echo ${CODACY_PROJECT_TOKEN}
+    - mvn org.jacoco:jacoco-maven-plugin:report # Generer report Jacoco
     - mvn com.gavinmogan:codacy-maven-plugin:coverage -DcoverageReportFile=target/site/jacoco/jacoco.xml -DprojectToken=${CODACY_PROJECT_TOKEN} -DapiToken=${CODACY_PROJECT_TOKEN} # Envoyer report Jacoco

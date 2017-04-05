@@ -39,8 +39,10 @@
 				<artifactId>jacoco-maven-plugin</artifactId>
 				<version>0.7.9</version>
 				
+				
+				<!--
 				<configuration>
-					<!-- Name it to make the dependency clearer; default: argLine -->
+					
                 	<propertyName>jacoco.agent.argLine</propertyName>
                 </configuration>
                 
@@ -62,7 +64,6 @@
                     </execution>
 				</executions>
 				
-				<!--
 				<executions>
 		          <execution>
 		            <id>default-prepare-agent</id>
