@@ -5,9 +5,10 @@
 
 # UCE Génie Logiciel Avancé : Techniques de tests
 
-### Trainer | RODRIGUEZ, Ricardo
-### Team | Alternants
-#### CERI M1 S1 ILSEN | Université d'Avignon et des Pays de Vaucluse
+### Trainer : RODRIGUEZ, Ricardo
+### Team : Alternants
+#### CERI M1 S1 ILSEN, Université d'Avignon et des Pays de Vaucluse
+
 
 ## Introduction
 Ce projet représente une implémentation simplifiée d'un jeu du style de PokemonGO afin d'apprendre des techniques d'Intégration Continue.
