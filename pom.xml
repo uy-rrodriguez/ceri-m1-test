@@ -39,6 +39,7 @@
 				<artifactId>jacoco-maven-plugin</artifactId>
 				<version>0.7.9</version>
 				
+				<!--
 				<executions>
 			        <execution>
 			            <id>jacoco-initialize</id>
@@ -55,7 +56,7 @@
 			        </execution>
 			    </executions>
 				
-				<!--
+				
 				<configuration>
 					
                 	<propertyName>jacoco.agent.argLine</propertyName>
