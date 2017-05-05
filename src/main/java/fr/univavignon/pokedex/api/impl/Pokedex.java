@@ -23,7 +23,16 @@ public class Pokedex implements IPokedex {
 
 	@Override
 	public Pokemon createPokemon(int index, int cp, int hp, int dust, int candy) {
-		PokemonMetadata meta = this.getPokemonMetadata(index);
+		PokemonMetadata meta;
+		try {
+			meta = this.getPokemonMetadata(index);
+		}
+		catch (Exception e) {
+			meta = new PokemonMetadata(index, "Bulbizarre", 128, 128, 90);
+		}
+		
+		
+		int iv = 56; // Pour Bulbizarre
 		Pokemon p = new Pokemon(index, meta.getName(), meta.getAttack(), meta.getDefense(),
 				meta.getStamina(), cp, hp, dust, candy, iv);
 		
