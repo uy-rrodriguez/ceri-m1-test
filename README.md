@@ -24,7 +24,10 @@ Je considère que la compléxité de l'implémentation exigée est excesive pour
 En ce qui me concerne, j'ai réussi à mettre en ligne un service, basé sur du code trouvé sur Internet, qui m'aurait permis de récupérer les métadonnées des Pokemons et réaliser le calcul des IVs, sans passer par l'analyse des sites web qui le font et l'utilisation de Selenium. À nouveau, toutes les technologies à utiliser nécessaires pour l'implémentation n'ont pas été vues en cours, il aurait donc fallu investir une quantité de temps que l'on n'a pas pour les prendre en main, les appliquer au code Java, etc. J'ai quand même essayé de parser le résultat des pages avec Selenium pour Java, sans succès.
 
 Le service qui retourne les métadonnées :
+
 https://poke-metadata.herokuapp.com/ivcal.php?method=getIVs&name=Bulbizarre&cp=613&hp=64&dust=4000&powerup=yes
+
 https://poke-metadata.herokuapp.com/ivcal.php?method=getMetadata&name=Bulbizarre
+
 
 Malgré ma motivation initiale en ce qui concernais le sujet du TP et mes efforts pour arriver à faire toute l'implémentation, je rends un code qui n'est pas fonctionnel, adapté simplement afin que les tests passent.
