@@ -22,20 +22,20 @@ public class IPokedexFactoryTest  {
 		}
 	};
 	
-	private Pokemon pokemon = new Pokemon(0, "Bulbizarre", 126, 126, 90, 613, 64, 4000, 4, 56);
+	private Pokemon pokemon = new Pokemon(0, "Bulbizarre", 118, 118, 90, 613, 64, 4000, 4, 56);
 	
 	
 	@Mock
-	private IPokedexFactory pokedexFactory;
+	protected IPokedexFactory pokedexFactory;
 	
 	@Mock
-	private IPokemonMetadataProvider metadataProvider;
+	protected IPokemonMetadataProvider metadataProvider;
 	
 	@Mock
-	private IPokemonFactory pokemonFactory;
+	protected IPokemonFactory pokemonFactory;
 	
 	@Mock
-	private IPokedex pokedex;
+	protected IPokedex pokedex;
 	
 	@Rule
 	public MockitoRule mockitoRule = MockitoJUnit.rule();

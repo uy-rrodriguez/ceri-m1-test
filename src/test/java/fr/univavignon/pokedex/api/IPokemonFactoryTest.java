@@ -18,7 +18,7 @@ import org.mockito.junit.MockitoRule;
 public class IPokemonFactoryTest {
 	
 	@Mock
-	private IPokemonFactory pokemonFactory;
+	protected IPokemonFactory pokemonFactory;
 	
 	@Rule
 	public MockitoRule mockitoRule = MockitoJUnit.rule();
@@ -31,7 +31,7 @@ public class IPokemonFactoryTest {
 	 */
 	protected static void configureIPokemonFactory(IPokemonFactory mock) {
 		when(mock.createPokemon(0, 613, 64, 4000, 4)).thenAnswer(a -> {
-			return new Pokemon(0, "Bulbizarre", 126, 126, 90, 613, 64, 4000, 4, 56);
+			return new Pokemon(0, "Bulbizarre", 118, 118, 90, 613, 64, 4000, 4, 56);
 		});
 	}
 	
@@ -62,8 +62,8 @@ public class IPokemonFactoryTest {
 		Pokemon poke = pokemonFactory.createPokemon(index, cp, hp, dust, candy);
 		
 		Assert.assertEquals("Bulbizarre", poke.getName());
-		Assert.assertEquals(126, poke.getAttack());
-		Assert.assertEquals(126, poke.getDefense());
+		Assert.assertEquals(118, poke.getAttack());
+		Assert.assertEquals(118, poke.getDefense());
 		Assert.assertEquals(90, poke.getStamina());
 		Assert.assertEquals(56, poke.getIv(), 0);
 		
