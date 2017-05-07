@@ -12,7 +12,7 @@ import java.util.Map;
 
 public class PokemonService implements IPokemonService {
 
-	private static String SERVICE_URL = "http://localhost/poke/ivcal.php?";
+	private static String SERVICE_URL = "https://poke-metadata.herokuapp.com/ivcal.php?";
 	public static String ERROR_KEY = "error";
 	
 	private String callService(String params) throws IOException {
