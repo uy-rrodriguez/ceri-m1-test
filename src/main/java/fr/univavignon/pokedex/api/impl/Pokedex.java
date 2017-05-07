@@ -1,8 +1,8 @@
 package fr.univavignon.pokedex.api.impl;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Set;
 
 import fr.univavignon.pokedex.api.IPokedex;
 import fr.univavignon.pokedex.api.IPokemonFactory;
@@ -13,16 +13,26 @@ import fr.univavignon.pokedex.api.PokemonMetadata;
 
 public class Pokedex implements IPokedex {
 
-	private Set<Pokemon> pokemons;
+	private List<Pokemon> pokemons;
+	private IPokemonMetadataProvider metadataProvider;
+	private IPokemonFactory pokemonFactory;
+	
+	public Pokedex(IPokemonMetadataProvider metadataProvider, IPokemonFactory pokemonFactory) {
+		pokemons = new ArrayList<>();
+		this.metadataProvider = metadataProvider;
+		this.pokemonFactory = pokemonFactory;
+	}
 	
 	@Override
 	public PokemonMetadata getPokemonMetadata(int index) throws PokedexException {
-		// TODO Auto-generated method stub
-		return null;
+		return metadataProvider.getPokemonMetadata(index);
 	}
 
 	@Override
 	public Pokemon createPokemon(int index, int cp, int hp, int dust, int candy) {
+		return pokemonFactory.createPokemon(index, cp, hp, dust, candy);
+		
+		/*
 		PokemonMetadata meta;
 		try {
 			meta = this.getPokemonMetadata(index);
@@ -39,6 +49,7 @@ public class Pokedex implements IPokedex {
 		this.pokemons.add(p);
 		
 		return p;
+		*/
 	}
 
 	@Override
@@ -48,26 +59,29 @@ public class Pokedex implements IPokedex {
 
 	@Override
 	public int addPokemon(Pokemon pokemon) {
-		//this.pokemons.
-		return 0;
+		pokemons.add(pokemon.getIndex() - 1, pokemon);
+		return pokemon.getIndex();
 	}
 
 	@Override
 	public Pokemon getPokemon(int id) throws PokedexException {
-		// TODO Auto-generated method stub
-		return null;
+		int index = (id - 1);
+		if (pokemons.size() <= index || pokemons.get(index) == null)
+			return null;
+		return pokemons.get(index);
 	}
 
 	@Override
 	public List<Pokemon> getPokemons() {
-		// TODO Auto-generated method stub
-		return null;
+		return pokemons;
 	}
 
 	@Override
 	public List<Pokemon> getPokemons(Comparator<Pokemon> order) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Pokemon> copy = new ArrayList<>();
+		copy.addAll(pokemons);
+		copy.sort(order);
+		return copy;
 	}
 
 }
