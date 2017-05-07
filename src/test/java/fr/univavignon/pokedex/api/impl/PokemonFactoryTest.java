@@ -47,7 +47,6 @@ public class PokemonFactoryTest extends IPokemonFactoryTest {
 			Assert.assertEquals("Bulbizarre", poke.getName()); // Ce code ne devrait pas etre pas execute
 		}
 		catch (PokedexException pokex) {
-			System.out.println("*** " + pokex.getMessage() + " ***");
 			Assert.assertTrue(pokex.getMessage().contains("Aucun pokémon trouvé avec ces données"));
 		}
 	}	

@@ -35,13 +35,12 @@ public class PokemonService implements IPokemonService {
 	}
 	
 	private Map<String, String> parseResponse(String json) {
+		String localJSON = json;
 		Map<String, String> res = new HashMap<>();
 		
 		// Gestion de reponse inconnue
-		//json = "{\"id\":1,\"name\":\"Bulbasaur\",\"stamina\":90,\"attack\":118,\"defense\":118}";
-		
-		if (! json.matches("^\\{.*\\}$")) {
-			res.put(ERROR_KEY, "Reponse inconnue : \"" + json + "\"");
+		if (! localJSON.matches("^\\{.*\\}$")) {
+			res.put(ERROR_KEY, "Reponse inconnue : \"" + localJSON + "\"");
 			return res;
 		}
 		
@@ -50,12 +49,12 @@ public class PokemonService implements IPokemonService {
 		// {"id":1,"name":"Bulbasaur","stamina":90,"attack":118,"defense":118}
 		// ﻿{"atkIV":3,"defIV":15,"staIV":7,"level":25,"perfection":56,"poke":{"id":1,"name":"Bulbasaur","stamina":90,"attack":118,"defense":118}}
 		// ﻿{"error":"Aucun pok\u00e9mon trouv\u00e9 avec ces donn\u00e9es"}
-		json = json.substring(1, json.length()-1);
+		localJSON = localJSON.substring(1, localJSON.length()-1);
 		
 		// "id":1,"name":"Bulbasaur","stamina":90,"attack":118,"defense":118
 		// ﻿"atkIV":3,"defIV":15,"staIV":7,"level":25,"perfection":56,"poke":{"id":1,"name":"Bulbasaur","stamina":90,"attack":118,"defense":118}
 		// ﻿"error":"Aucun pok\u00e9mon trouv\u00e9 avec ces donn\u00e9es"
-		String[] attribs = json.split(",");
+		String[] attribs = localJSON.split(",");
 		String[] attParts;
 		
 		for (String att : attribs) {
