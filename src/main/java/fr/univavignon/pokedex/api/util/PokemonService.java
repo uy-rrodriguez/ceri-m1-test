@@ -23,11 +23,11 @@ public class PokemonService implements IPokemonService {
 	    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 	    conn.setRequestMethod("GET");
 	    conn.setRequestProperty("Content-Length", Integer.toString(params.getBytes().length));
+	    conn.setUseCaches(false);
+	    conn.setDoOutput(true);
 	    
 	    //conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
 	    //conn.setRequestProperty("Content-Language", "en-US");  
-	    //conn.setUseCaches(false);
-	    //conn.setDoOutput(true);
 
 	    //Send request
 	    DataOutputStream wr = new DataOutputStream(conn.getOutputStream());
