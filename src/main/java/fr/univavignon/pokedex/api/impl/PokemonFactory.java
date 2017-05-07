@@ -11,23 +11,26 @@ public class PokemonFactory implements IPokemonFactory {
 
 	@Override
 	public Pokemon createPokemon(int index, int cp, int hp, int dust, int candy) {
+		// L'id du Pokemon est 1 de plus que son index dans la Pokedex
+		int id = index +1;
+				
 		Pokemon poke;
 		
 		// Connection au service web
 		IPokemonService service = new PokemonService();
-		Map<String, Object> data = service.getPokemonMetadata(index);
-		Map<String, Object> ivs = service.getPokemonIVs(index, cp, hp, dust);
+		Map<String, Object> data = service.getPokemonMetadata(id);
+		Map<String, Object> ivs = service.getPokemonIVs(id, cp, hp, dust);
 		
 		if (data.containsKey(PokemonService.ERROR_KEY)) {
 			System.out.println("Erreur : " + data.get(PokemonService.ERROR_KEY));
-			poke = new Pokemon(index, "", 0, 0, 0, cp, hp, dust, candy, 0);
+			poke = new Pokemon(id, "", 0, 0, 0, cp, hp, dust, candy, 0);
 		}
 		
 		else if (ivs.containsKey(PokemonService.ERROR_KEY)) {
 			System.out.println("Erreur : " + ivs.get(PokemonService.ERROR_KEY));
-			poke = new Pokemon(index, "", 0, 0, 0, cp, hp, dust, candy, 0);
+			poke = new Pokemon(id, "", 0, 0, 0, cp, hp, dust, candy, 0);
 			/*
-			poke = new Pokemon(index,
+			poke = new Pokemon(id,
 					(String) data.get("name"),
 					(int) data.get("attack"),
 					(int) data.get("defense"),
@@ -37,7 +40,7 @@ public class PokemonFactory implements IPokemonFactory {
 		}
 		
 		else {
-			poke = new Pokemon(index,
+			poke = new Pokemon(id,
 					(String) data.get("name"),
 					(int) data.get("attack"),
 					(int) data.get("defense"),

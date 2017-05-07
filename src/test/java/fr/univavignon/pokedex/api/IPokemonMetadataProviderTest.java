@@ -17,7 +17,7 @@ import static org.mockito.Mockito.*;
 public class IPokemonMetadataProviderTest {
 
 	@Mock
-	private static IPokemonMetadataProvider metadataProvider;
+	protected static IPokemonMetadataProvider metadataProvider;
 	
 	@Rule
 	public MockitoRule mockitoRule = MockitoJUnit.rule();

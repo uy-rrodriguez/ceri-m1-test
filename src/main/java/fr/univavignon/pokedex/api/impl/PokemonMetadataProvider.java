@@ -12,18 +12,21 @@ public class PokemonMetadataProvider implements IPokemonMetadataProvider {
 
 	@Override
 	public PokemonMetadata getPokemonMetadata(int index) throws PokedexException {
+		// L'id du Pokemon est 1 de plus que son index dans la Pokedex
+		int id = index +1;
+		
 		PokemonMetadata pokeMeta;
 		
 		// Connection au service web
 		IPokemonService service = new PokemonService();
-		Map<String, Object> data = service.getPokemonMetadata(index);
+		Map<String, Object> data = service.getPokemonMetadata(id);
 		
 		if (data.containsKey(PokemonService.ERROR_KEY)) {
 			System.out.println("Erreur : " + data.get(PokemonService.ERROR_KEY));
-			pokeMeta = new PokemonMetadata(index, "", 0, 0, 0);
+			pokeMeta = new PokemonMetadata(id, "", 0, 0, 0);
 		}
 		else {
-			pokeMeta = new PokemonMetadata(index,
+			pokeMeta = new PokemonMetadata(id,
 					(String) data.get("name"),
 					(int) data.get("attack"),
 					(int) data.get("defense"),
