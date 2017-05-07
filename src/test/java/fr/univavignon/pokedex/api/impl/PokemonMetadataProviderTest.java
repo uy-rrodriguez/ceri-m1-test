@@ -33,7 +33,7 @@ public class PokemonMetadataProviderTest extends IPokemonMetadataProviderTest {
 		}
 		
 		try {
-			int index = 152;
+			int index = 2500;
 			metadata = metadataProvider.getPokemonMetadata(index);
 			Assert.assertEquals("", metadata.getName()); // Ce code ne devrait pas etre pas execute
 		}
