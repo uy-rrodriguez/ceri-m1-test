@@ -90,9 +90,9 @@ public class PokemonService implements IPokemonService {
 	
 	@Override
 	public Map<String, Object> getPokemonMetadata(int index) {
+		Map<String, Object> res = new HashMap<>();
+		
 		try {
-			Map<String, Object> res = new HashMap<>();
-			
 			// Construction des parametres
 			String params = "method=getMetadata";
 			params += "&name=" + index;
@@ -107,7 +107,7 @@ public class PokemonService implements IPokemonService {
 			if (respValues.containsKey(ERROR_KEY)) {
 				// System.out.println("Erreur : " + respValues.get("error"));
 				res.put(ERROR_KEY, respValues.get(ERROR_KEY));
-				return null;
+				return res;
 			}
 			
 			// Construction du map de retour
@@ -122,15 +122,16 @@ public class PokemonService implements IPokemonService {
 		}
 		catch (Exception e) {
 			e.printStackTrace();
-			return null;
+			res.put(ERROR_KEY, e.getMessage());
+			return res;
 		}
 	}
 
 	@Override
 	public Map<String, Object> getPokemonIVs(int index, int cp, int hp, int dust) {
+		Map<String, Object> res = new HashMap<>();
+		
 		try {
-			Map<String, Object> res = new HashMap<>();
-			
 			// Construction des parametres
 			String params = "method=getIVs";
 			params += "&name=" + index;
@@ -148,7 +149,7 @@ public class PokemonService implements IPokemonService {
 			if (respValues.containsKey(ERROR_KEY)) {
 				//System.out.println("Erreur : " + respValues.get("error"));
 				res.put(ERROR_KEY, respValues.get(ERROR_KEY));
-				return null;
+				return res;
 			}
 			
 			// Construction du map de retour
@@ -163,7 +164,8 @@ public class PokemonService implements IPokemonService {
 		}
 		catch (Exception e) {
 			e.printStackTrace();
-			return null;
+			res.put(ERROR_KEY, e.getMessage());
+			return res;
 		}
 	}
 
