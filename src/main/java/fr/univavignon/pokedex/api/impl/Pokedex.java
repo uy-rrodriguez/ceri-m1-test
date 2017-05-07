@@ -59,7 +59,11 @@ public class Pokedex implements IPokedex {
 
 	@Override
 	public int addPokemon(Pokemon pokemon) {
-		pokemons.add(pokemon.getIndex() - 1, pokemon);
+		// L'id du Pokemon dans cette application (d'apres les PDF du cours)
+		// est 1 de moins que son vrai ID, du coup sa correspond
+		// exactement avec l'index dans la liste
+		
+		pokemons.add(pokemon.getIndex(), pokemon);
 		return pokemon.getIndex();
 	}
 
@@ -67,7 +71,7 @@ public class Pokedex implements IPokedex {
 	public Pokemon getPokemon(int id) throws PokedexException {
 		//int index = (id - 1);
 		
-		// L'id du Pokemon dans cet application (d'apres les PDF du cours)
+		// L'id du Pokemon dans cette application (d'apres les PDF du cours)
 		// est 1 de moins que son vrai ID, du coup sa correspond
 		// exactement avec l'index dans la liste
 		int index = id;
