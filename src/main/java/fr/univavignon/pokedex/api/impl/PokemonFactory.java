@@ -3,6 +3,7 @@ package fr.univavignon.pokedex.api.impl;
 import java.util.Map;
 
 import fr.univavignon.pokedex.api.IPokemonFactory;
+import fr.univavignon.pokedex.api.PokedexException;
 import fr.univavignon.pokedex.api.Pokemon;
 import fr.univavignon.pokedex.api.util.IPokemonService;
 import fr.univavignon.pokedex.api.util.PokemonService;
@@ -11,7 +12,7 @@ import fr.univavignon.pokedex.api.util.PokemonTranslate;
 public class PokemonFactory implements IPokemonFactory {
 
 	@Override
-	public Pokemon createPokemon(int index, int cp, int hp, int dust, int candy) {
+	public Pokemon createPokemon(int index, int cp, int hp, int dust, int candy) throws PokedexException {
 		// L'id du Pokemon est 1 de plus que son index dans la Pokedex
 		int id = index +1;
 				
@@ -23,13 +24,15 @@ public class PokemonFactory implements IPokemonFactory {
 		Map<String, Object> ivs = service.getPokemonIVs(id, cp, hp, dust);
 		
 		if (data.containsKey(PokemonService.ERROR_KEY)) {
-			System.out.println("Erreur : " + data.get(PokemonService.ERROR_KEY));
-			poke = new Pokemon(index, "", 0, 0, 0, cp, hp, dust, candy, 0);
+			throw new PokedexException((String) data.get(PokemonService.ERROR_KEY));
+			//System.out.println("*** ERREUR : " + data.get(PokemonService.ERROR_KEY) + " ***");
+			//poke = new Pokemon(index, "", 0, 0, 0, cp, hp, dust, candy, 0);
 		}
 		
 		else if (ivs.containsKey(PokemonService.ERROR_KEY)) {
-			System.out.println("Erreur : " + ivs.get(PokemonService.ERROR_KEY));
-			poke = new Pokemon(index, "", 0, 0, 0, cp, hp, dust, candy, 0);
+			throw new PokedexException((String) data.get(PokemonService.ERROR_KEY));
+			//System.out.println("*** ERREUR : " + ivs.get(PokemonService.ERROR_KEY) + " ***");
+			//poke = new Pokemon(index, "", 0, 0, 0, cp, hp, dust, candy, 0);
 			/*
 			poke = new Pokemon(index,
 					(String) data.get("name"),

@@ -65,6 +65,7 @@ public class IPokemonMetadataProviderTest {
 		}
 		catch (PokedexException pokex) {
 			pokex.printStackTrace();
+			Assert.fail("Erreur non attendue a ce point");
 		}
 	}
 	

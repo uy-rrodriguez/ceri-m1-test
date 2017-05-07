@@ -23,8 +23,9 @@ public class PokemonMetadataProvider implements IPokemonMetadataProvider {
 		Map<String, Object> data = service.getPokemonMetadata(id);
 		
 		if (data.containsKey(PokemonService.ERROR_KEY)) {
-			System.out.println("*** ERREUR : " + data.get(PokemonService.ERROR_KEY) + " ***");
-			pokeMeta = new PokemonMetadata(index, "", 0, 0, 0);
+			throw new PokedexException((String) data.get(PokemonService.ERROR_KEY));
+			//System.out.println("*** ERREUR : " + data.get(PokemonService.ERROR_KEY) + " ***");
+			//pokeMeta = new PokemonMetadata(index, "", 0, 0, 0);
 		}
 		else {
 			pokeMeta = new PokemonMetadata(index,

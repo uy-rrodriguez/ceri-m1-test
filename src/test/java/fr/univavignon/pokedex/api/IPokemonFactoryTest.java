@@ -27,12 +27,16 @@ public class IPokemonFactoryTest {
 	 * Configuration du mock pour IPokemonFactory.
 	 * 
 	 * @param mock
+	 * @throws PokedexException 
 	 * @throws Exception
 	 */
 	protected static void configureIPokemonFactory(IPokemonFactory mock) {
-		when(mock.createPokemon(0, 613, 64, 4000, 4)).thenAnswer(a -> {
-			return new Pokemon(0, "Bulbizarre", 118, 118, 90, 613, 64, 4000, 4, 56);
-		});
+		try {
+			when(mock.createPokemon(0, 613, 64, 4000, 4)).thenAnswer(a -> {
+				return new Pokemon(0, "Bulbizarre", 118, 118, 90, 613, 64, 4000, 4, 56);
+			});
+		}
+		catch (PokedexException pokex) {}
 	}
 	
 	@Before
@@ -59,19 +63,25 @@ public class IPokemonFactoryTest {
 		int dust = 4000;
 		int candy = 4;
 		
-		Pokemon poke = pokemonFactory.createPokemon(index, cp, hp, dust, candy);
-		
-		Assert.assertEquals("Bulbizarre", poke.getName());
-		Assert.assertEquals(118, poke.getAttack());
-		Assert.assertEquals(118, poke.getDefense());
-		Assert.assertEquals(90, poke.getStamina());
-		Assert.assertEquals(56, poke.getIv(), 0);
-		
-		Assert.assertEquals(index, poke.getIndex());
-		Assert.assertEquals(cp, poke.getCp());
-		Assert.assertEquals(hp, poke.getHp());
-		Assert.assertEquals(dust, poke.getDust());
-		Assert.assertEquals(candy, poke.getCandy());
+		try {
+			Pokemon poke = pokemonFactory.createPokemon(index, cp, hp, dust, candy);
+			
+			Assert.assertEquals("Bulbizarre", poke.getName());
+			Assert.assertEquals(118, poke.getAttack());
+			Assert.assertEquals(118, poke.getDefense());
+			Assert.assertEquals(90, poke.getStamina());
+			Assert.assertEquals(56, poke.getIv(), 0);
+			
+			Assert.assertEquals(index, poke.getIndex());
+			Assert.assertEquals(cp, poke.getCp());
+			Assert.assertEquals(hp, poke.getHp());
+			Assert.assertEquals(dust, poke.getDust());
+			Assert.assertEquals(candy, poke.getCandy());
+		}
+		catch (PokedexException pokex) {
+			pokex.printStackTrace();
+			Assert.fail("Erreur non attendue a ce point");
+		}
 	}
 	
 }
