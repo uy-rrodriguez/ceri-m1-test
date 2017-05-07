@@ -31,7 +31,7 @@ public class IPokemonMetadataProviderTest {
 	 */
 	protected static void configureIPokemonMetadataProvider(IPokemonMetadataProvider mock) throws PokedexException {
 		when(mock.getPokemonMetadata(0)).thenAnswer(a -> {
-			return new PokemonMetadata(0, "Bulbizarre", 126, 126, 90);
+			return new PokemonMetadata(0, "Bulbizarre", 118, 118, 90);
 		});
 	}
 	
@@ -59,8 +59,8 @@ public class IPokemonMetadataProviderTest {
 			
 			Assert.assertEquals("Bulbizarre", metadata.getName());
 			Assert.assertEquals(0, metadata.getIndex());
-			Assert.assertEquals(126, metadata.getAttack());
-			Assert.assertEquals(126, metadata.getDefense());
+			Assert.assertEquals(118, metadata.getAttack());
+			Assert.assertEquals(118, metadata.getDefense());
 			Assert.assertEquals(90, metadata.getStamina());
 		}
 		catch (PokedexException pokex) {

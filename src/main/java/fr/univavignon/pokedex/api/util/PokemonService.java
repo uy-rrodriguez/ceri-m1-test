@@ -1,60 +1,47 @@
 package fr.univavignon.pokedex.api.util;
 
 import java.io.BufferedReader;
-import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLConnection;
 import java.util.HashMap;
 import java.util.Map;
 
 public class PokemonService implements IPokemonService {
 
-	private static String SERVICE_URL = "https://poke-metadata.herokuapp.com/ivcal.php?";
-	public static String ERROR_KEY = "error";
+	private static final String SERVICE_URL = "https://poke-metadata.herokuapp.com/ivcal.php?";
+	//private static final String SERVICE_URL = "http://localhost/poke/ivcal.php?";
+	public static final String ERROR_KEY = "error";
 	
 	private String callService(String params) throws IOException {
 		String resp = "";
 		
 		//Create connection
-	    URL url = new URL(SERVICE_URL);
-	    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-	    conn.setRequestMethod("GET");
-	    conn.setRequestProperty("Content-Length", Integer.toString(params.getBytes().length));
+	    URL url = new URL(SERVICE_URL + params);
+	    URLConnection conn = url.openConnection();
 	    conn.setUseCaches(false);
 	    conn.setDoOutput(true);
 	    
-	    //conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-	    //conn.setRequestProperty("Content-Language", "en-US");  
-
-	    //Send request
-	    DataOutputStream wr = new DataOutputStream(conn.getOutputStream());
-	    wr.writeBytes(params);
-	    wr.close();
-
 	    //Get Response  
 	    InputStream is = conn.getInputStream();
-	    BufferedReader rd = new BufferedReader(new InputStreamReader(is));
-	    StringBuffer response = new StringBuffer(); // or StringBuffer if Java version 5+
-	    String line;
-	    while ((line = rd.readLine()) != null) {
-	      response.append(line);
-	      response.append('\r');
-	    }
-	    rd.close();
+	    InputStreamReader r = new InputStreamReader(is, "UTF-8");
+	    BufferedReader buff = new BufferedReader(r);
+	    
+	    resp = buff.readLine();
 		
-		resp = response.toString();
-		return resp;
+	    return resp;
 	}
 	
 	private Map<String, String> parseResponse(String json) {
 		Map<String, String> res = new HashMap<>();
 		
 		// Gestion de reponse inconnue
+		//json = "{\"id\":1,\"name\":\"Bulbasaur\",\"stamina\":90,\"attack\":118,\"defense\":118}";
+		
 		if (! json.matches("^\\{.*\\}$")) {
-			res.put(ERROR_KEY, "Reponse inconnue");
+			res.put(ERROR_KEY, "Reponse inconnue : \"" + json + "\"");
 			return res;
 		}
 		

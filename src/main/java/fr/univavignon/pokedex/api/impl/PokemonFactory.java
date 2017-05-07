@@ -23,14 +23,14 @@ public class PokemonFactory implements IPokemonFactory {
 		
 		if (data.containsKey(PokemonService.ERROR_KEY)) {
 			System.out.println("Erreur : " + data.get(PokemonService.ERROR_KEY));
-			poke = new Pokemon(id, "", 0, 0, 0, cp, hp, dust, candy, 0);
+			poke = new Pokemon(index, "", 0, 0, 0, cp, hp, dust, candy, 0);
 		}
 		
 		else if (ivs.containsKey(PokemonService.ERROR_KEY)) {
 			System.out.println("Erreur : " + ivs.get(PokemonService.ERROR_KEY));
-			poke = new Pokemon(id, "", 0, 0, 0, cp, hp, dust, candy, 0);
+			poke = new Pokemon(index, "", 0, 0, 0, cp, hp, dust, candy, 0);
 			/*
-			poke = new Pokemon(id,
+			poke = new Pokemon(index,
 					(String) data.get("name"),
 					(int) data.get("attack"),
 					(int) data.get("defense"),
@@ -40,7 +40,7 @@ public class PokemonFactory implements IPokemonFactory {
 		}
 		
 		else {
-			poke = new Pokemon(id,
+			poke = new Pokemon(index,
 					(String) data.get("name"),
 					(int) data.get("attack"),
 					(int) data.get("defense"),

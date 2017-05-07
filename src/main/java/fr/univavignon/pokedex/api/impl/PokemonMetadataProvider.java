@@ -7,6 +7,7 @@ import fr.univavignon.pokedex.api.PokedexException;
 import fr.univavignon.pokedex.api.PokemonMetadata;
 import fr.univavignon.pokedex.api.util.IPokemonService;
 import fr.univavignon.pokedex.api.util.PokemonService;
+import fr.univavignon.pokedex.api.util.PokemonTranslate;
 
 public class PokemonMetadataProvider implements IPokemonMetadataProvider {
 
@@ -22,12 +23,12 @@ public class PokemonMetadataProvider implements IPokemonMetadataProvider {
 		Map<String, Object> data = service.getPokemonMetadata(id);
 		
 		if (data.containsKey(PokemonService.ERROR_KEY)) {
-			System.out.println("Erreur : " + data.get(PokemonService.ERROR_KEY));
-			pokeMeta = new PokemonMetadata(id, "", 0, 0, 0);
+			System.out.println("*** ERREUR : " + data.get(PokemonService.ERROR_KEY) + " ***");
+			pokeMeta = new PokemonMetadata(index, "", 0, 0, 0);
 		}
 		else {
-			pokeMeta = new PokemonMetadata(id,
-					(String) data.get("name"),
+			pokeMeta = new PokemonMetadata(index,
+					PokemonTranslate.getInstance().getFrenchName((String) data.get("name")),
 					(int) data.get("attack"),
 					(int) data.get("defense"),
 					(int) data.get("stamina"));
