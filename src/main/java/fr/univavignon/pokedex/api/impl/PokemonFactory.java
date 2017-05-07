@@ -30,7 +30,7 @@ public class PokemonFactory implements IPokemonFactory {
 		}
 		
 		else if (ivs.containsKey(PokemonService.ERROR_KEY)) {
-			throw new PokedexException((String) data.get(PokemonService.ERROR_KEY));
+			throw new PokedexException((String) ivs.get(PokemonService.ERROR_KEY));
 			//System.out.println("*** ERREUR : " + ivs.get(PokemonService.ERROR_KEY) + " ***");
 			//poke = new Pokemon(index, "", 0, 0, 0, cp, hp, dust, candy, 0);
 			/*
