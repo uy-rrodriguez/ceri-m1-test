@@ -9,9 +9,9 @@ public class PokemonTrainerFactoryTest extends IPokemonTrainerFactoryTest {
 	@Before
 	public void setUp() throws Exception {
 		trainerFactory = new PokemonTrainerFactory();
-		pokedexFactory = null;
+		pokedexFactory = new PokedexFactory();
+		metadataProvider = new PokemonMetadataProvider();
+		pokemonFactory = new PokemonFactory();
 		pokedex = null;
-		metadataProvider = null;
-		pokemonFactory = null;
 	}
 }

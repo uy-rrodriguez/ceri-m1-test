@@ -14,7 +14,7 @@ import org.mockito.junit.MockitoRule;
 
 public class IPokedexTest  {
 	
-	private Pokemon pokemon = new Pokemon(0, "Bulbizarre", 118, 118, 90, 613, 64, 4000, 4, 56);
+	private static Pokemon pokemonMock = new Pokemon(0, "Bulbizarre", 118, 118, 90, 613, 64, 4000, 4, 56);
 	
 	
 	@Mock
@@ -40,13 +40,13 @@ public class IPokedexTest  {
 	 * @param order
 	 * @throws PokedexException
 	 */
-	protected static void configureIPokedex(IPokedex mock, Pokemon pokemon) throws PokedexException {
+	protected static void configureIPokedex(IPokedex mock) throws PokedexException {
 		when(mock.size()).thenAnswer(a -> 1);
 		when(mock.addPokemon(null)).thenAnswer(a -> 0);
-		when(mock.getPokemon(0)).thenAnswer(a -> pokemon);
-		when(mock.getPokemons()).thenAnswer(a -> Arrays.asList(new Pokemon[] {pokemon} ));
-		when(mock.getPokemons(null)).thenAnswer(a -> Arrays.asList(new Pokemon[] {pokemon}  ));
-		when(mock.getPokemons(PokemonComparators.INDEX)).thenAnswer(a -> Arrays.asList(new Pokemon[] {pokemon}));
+		when(mock.getPokemon(0)).thenAnswer(a -> pokemonMock);
+		when(mock.getPokemons()).thenAnswer(a -> Arrays.asList(new Pokemon[] {pokemonMock} ));
+		when(mock.getPokemons(null)).thenAnswer(a -> Arrays.asList(new Pokemon[] {pokemonMock}  ));
+		when(mock.getPokemons(PokemonComparators.INDEX)).thenAnswer(a -> Arrays.asList(new Pokemon[] {pokemonMock}));
 	}
 	
 	/**
@@ -60,7 +60,6 @@ public class IPokedexTest  {
 	 */
 	protected static void configureIPokedexFactory(IPokedexFactory mock,
 													IPokedex pokedex,
-													Pokemon pokemon,
 													IPokemonMetadataProvider metadataProvider,
 													IPokemonFactory pokemonFactory) throws PokedexException {
 		
@@ -71,7 +70,7 @@ public class IPokedexTest  {
 		IPokemonFactoryTest.configureIPokemonFactory(pokemonFactory);
 
 		// Mock IPokedex
-		configureIPokedex(pokedex, pokemon);
+		configureIPokedex(pokedex);
 
 		// Mock IPokedexFactory
 		when(mock.createPokedex(metadataProvider, pokemonFactory)).thenAnswer(a -> pokedex);
@@ -80,7 +79,7 @@ public class IPokedexTest  {
 	
 	@Before
 	public void setUp() throws Exception {
-		configureIPokedexFactory(pokedexFactory, pokedex, pokemon, metadataProvider, pokemonFactory);
+		configureIPokedexFactory(pokedexFactory, pokedex, metadataProvider, pokemonFactory);
 	}
 	
 	/**
@@ -96,8 +95,11 @@ public class IPokedexTest  {
 	public void testCreatePokedex() {
 		try {
 			IPokedex localPokedex = pokedexFactory.createPokedex(metadataProvider, pokemonFactory);
-			Assert.assertEquals(1, localPokedex.size());
+			
+			Pokemon pokemon = localPokedex.createPokemon(0, 613, 64, 4000, 4);
+			
 			Assert.assertEquals(0, localPokedex.addPokemon(pokemon));
+			Assert.assertEquals(1, localPokedex.size());
 			Assert.assertEquals("Bulbizarre", localPokedex.getPokemon(0).getName());
 			
 			Assert.assertEquals("Bulbizarre", localPokedex.getPokemons().get(0).getName());

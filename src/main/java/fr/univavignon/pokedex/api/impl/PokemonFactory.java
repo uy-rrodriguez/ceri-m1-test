@@ -6,6 +6,7 @@ import fr.univavignon.pokedex.api.IPokemonFactory;
 import fr.univavignon.pokedex.api.Pokemon;
 import fr.univavignon.pokedex.api.util.IPokemonService;
 import fr.univavignon.pokedex.api.util.PokemonService;
+import fr.univavignon.pokedex.api.util.PokemonTranslate;
 
 public class PokemonFactory implements IPokemonFactory {
 
@@ -41,7 +42,7 @@ public class PokemonFactory implements IPokemonFactory {
 		
 		else {
 			poke = new Pokemon(index,
-					(String) data.get("name"),
+					PokemonTranslate.getInstance().getFrenchName((String) data.get("name")),
 					(int) data.get("attack"),
 					(int) data.get("defense"),
 					(int) data.get("stamina"),

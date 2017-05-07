@@ -49,12 +49,15 @@ public class IPokedexFactoryTest  {
 	 * @throws PokedexException
 	 */
 	protected static void configureIPokedex(IPokedex mock, Pokemon pokemon, Comparator<Pokemon> order) throws PokedexException {
-		when(mock.size()).thenAnswer(a -> 1);
+		when(mock.size()).thenAnswer(a -> 0);
+		
+		/*
 		when(mock.addPokemon(null)).thenAnswer(a -> 0);
 		when(mock.getPokemon(0)).thenAnswer(a -> pokemon);
 		when(mock.getPokemons()).thenAnswer(a -> Arrays.asList(new Pokemon[] {pokemon} ));
 		when(mock.getPokemons(null)).thenAnswer(a -> Arrays.asList(new Pokemon[] {pokemon}  ));
 		when(mock.getPokemons(order)).thenAnswer(a -> Arrays.asList(new Pokemon[] {pokemon}));
+		*/
 	}
 	
 	/**
@@ -105,14 +108,7 @@ public class IPokedexFactoryTest  {
 	public void testCreatePokedex() {
 		try {
 			IPokedex localPokedex = pokedexFactory.createPokedex(metadataProvider, pokemonFactory);
-			Assert.assertEquals(1, localPokedex.size());
-			Assert.assertEquals(0, localPokedex.addPokemon(pokemon));
-			Assert.assertEquals("Bulbizarre", localPokedex.getPokemon(0).getName());
-			
-			Assert.assertEquals("Bulbizarre", localPokedex.getPokemons().get(0).getName());
-			Assert.assertEquals("Bulbizarre", localPokedex.getPokemons(null).get(0).getName());
-			
-			Assert.assertEquals("Bulbizarre", localPokedex.getPokemons(order).get(0).getName());
+			Assert.assertEquals(0, localPokedex.size());
 		}
 		catch (Exception ex) {
 			ex.printStackTrace();
