@@ -94,14 +94,38 @@ public class IPokedexTest  {
 	@Test
 	public void testCreatePokedex() {
 		try {
+            int index = 0;
+            int cp = 613;
+            int hp = 64;
+            int dust = 4000;
+            int candy = 4;
+            
 			IPokedex localPokedex = pokedexFactory.createPokedex(metadataProvider, pokemonFactory);
 			
-			Pokemon pokemon = localPokedex.createPokemon(0, 613, 64, 4000, 4);
-			
+			// Methodes de Pokemon
+            Pokemon pokemon = localPokedex.createPokemon(index, cp, hp, dust, candy);
 			Assert.assertEquals(0, localPokedex.addPokemon(pokemon));
 			Assert.assertEquals(1, localPokedex.size());
-			Assert.assertEquals("Bulbizarre", localPokedex.getPokemon(0).getName());
+			Assert.assertEquals("Bulbizarre", localPokedex.getPokemon(index).getName());
+			Assert.assertEquals(0, localPokedex.getPokemon(index).getIndex());
+			Assert.assertEquals(118, localPokedex.getPokemon(index).getAttack());
+			Assert.assertEquals(118, localPokedex.getPokemon(index).getDefense());
+			Assert.assertEquals(90, localPokedex.getPokemon(index).getStamina());
+            Assert.assertEquals(cp, localPokedex.getPokemon(index).getCp());
+			Assert.assertEquals(hp, localPokedex.getPokemon(index).getHp());
+			Assert.assertEquals(dust, localPokedex.getPokemon(index).getDust());
+			Assert.assertEquals(candy, localPokedex.getPokemon(index).getCandy());
+            Assert.assertEquals(56, localPokedex.getPokemon(index).getIv(), 0);
+            
+            // Methodes de PokemonMetadtada
+            PokemonMetadata metadata = localPokedex.getPokemonMetadata(index);
+			Assert.assertEquals("Bulbizarre", metadata.getName());
+			Assert.assertEquals(0, metadata.getIndex());
+			Assert.assertEquals(118, metadata.getAttack());
+			Assert.assertEquals(118, metadata.getDefense());
+			Assert.assertEquals(90, metadata.getStamina());
 			
+            // Methodes de Pokedex
 			Assert.assertEquals("Bulbizarre", localPokedex.getPokemons().get(0).getName());
 			Assert.assertEquals("Bulbizarre", localPokedex.getPokemons(null).get(0).getName());
 			
